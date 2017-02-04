@@ -1,0 +1,32 @@
+AppBundle\Entity\Mission:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\MissionRepository
+    oneToOne:
+        child_mission:
+            targetEntity: AppBundle\Entity\Mission
+    manyToOne:
+        financial_year:
+            targetEntity: AppBundle\Entity\FinancialYear
+            inversedBy: missions
+            joinColumn:
+                nullable: false
+    manyToMany:
+        tasks:
+            targetEntity: AppBundle\Entity\Task
+            mappedBy: missions
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 50
+        description:
+            type: string
+            length: 255
+            nullable: true
+    lifecycleCallbacks: {  }

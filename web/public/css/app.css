@@ -1,0 +1,6 @@
+/* Layout general */
+/******************/
+
+/* Navbar */
+#side-menu .profile-element img{width: 48px;}
+#side-menu .navbar-fixed-top, .navbar-static-top{margin-bottom: 0;}

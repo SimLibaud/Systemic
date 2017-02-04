@@ -1,0 +1,32 @@
+{% extends ':society:base.html.twig' %}
+
+{% block content %}
+    Liste des sociétés... <br>
+    <ul>
+        {% for society in societies %}
+            <li>{{ society.name }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ path('app_society_add') }}">Ajouter une société</a>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Liste des organisations</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>{{ 'name' | trans }}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

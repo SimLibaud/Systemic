@@ -1,0 +1,3 @@
+app_society:
+    resource: "@AppBundle/Resources/config/routing/society.yml"
+    prefix: /society

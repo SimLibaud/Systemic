@@ -1,0 +1,20 @@
+AppBundle\Entity\Society:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\SocietyRepository
+    oneToMany:
+        financial_years:
+            targetEntity: AppBundle\Entity\FinancialYear
+            mappedBy: society
+            cascade: ["remove"]
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 100
+    lifecycleCallbacks: {  }

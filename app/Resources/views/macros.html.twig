@@ -1,0 +1,10 @@
+{# Item to breadcrumd #}
+{% macro breadcrumbItem(title, route = '', params = {}) -%}
+    <li>
+        {% if route != '' %}
+            <a href="{{ path(route, params) }}">{{ title }}</a>
+        {% else %}
+            <span>{{ title }}</span>
+        {% endif %}
+    </li>
+{%- endmacro %}

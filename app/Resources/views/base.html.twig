@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DYAM - Gestion Systémique</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <link rel="stylesheet" href="{{ asset('public/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('public/css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('public/css/animate.css') }}">
+        <link rel="stylesheet" href="{{ asset('public/css/inspinia.css') }}">
+        <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block layout %}{% endblock %}
+        <script type="text/javascript" src="{{ asset('public/js/jquery-2.1.1.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('public/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('public/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('public/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('public/js/inspinia.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('public/js/plugins/pace/pace.min.js') }}"></script>
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

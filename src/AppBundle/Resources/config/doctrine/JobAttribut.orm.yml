@@ -1,0 +1,39 @@
+AppBundle\Entity\JobAttribut:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\JobAttributRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        monthly_gross_salary:
+            type: decimal
+            scale: 2
+        monthly_charge:
+            type: decimal
+            scale: 2
+        monthly_employer_contribution:
+            type: decimal
+            scale: 2
+        annual_employer_aid:
+            type: decimal
+            scale: 2
+        annual_effective_working_time:
+            type: decimal
+            scale: 2
+        annual_real_hour:
+            type: decimal
+            scale: 2
+        annual_net:
+            type: decimal
+            scale: 2
+        bounty:
+            type: decimal
+            scale: 2
+        avantage:
+            type: decimal
+            scale: 2
+    lifecycleCallbacks: {  }

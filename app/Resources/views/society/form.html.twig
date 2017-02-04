@@ -1,0 +1,16 @@
+{% extends ':society:base.html.twig' %}
+
+{% import '::macros.html.twig' as macro %}
+
+{% set title = (society is defined ? 'editSociety' : 'addOrganisation') | trans %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    {{ macro.breadcrumbItem(title) }}
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+        {{ form_row(form.name) }}
+    {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,27 @@
+AppBundle\Entity\FunctionAssoc:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\FunctionAssocRepository
+    oneToMany:
+        tasks:
+            targetEntity: AppBundle\Entity\Task
+            mappedBy: functionAssoc
+    manyToOne:
+        financial_year:
+            targetEntity: AppBundle\Entity\FinancialYear
+            inversedBy: functions_assoc
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 50
+        description:
+            type: string
+            length: 255
+            nullable: true
+    lifecycleCallbacks: {  }

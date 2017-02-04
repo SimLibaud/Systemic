@@ -1,0 +1,25 @@
+<?php
+
+namespace AppBundle\Entity;
+
+/**
+ * Functions
+ */
+class Functions
+{
+    /**
+     * @var int
+     */
+    private $id;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

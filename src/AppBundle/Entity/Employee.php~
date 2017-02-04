@@ -1,0 +1,10 @@
+<?php
+
+namespace AppBundle\Entity;
+
+/**
+ * Employee
+ */
+class Employee
+{
+}

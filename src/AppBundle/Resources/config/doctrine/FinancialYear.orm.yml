@@ -1,0 +1,31 @@
+AppBundle\Entity\FinancialYear:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\FinancialYearRepository
+    oneToMany:
+        missions:
+            targetEntity: AppBundle\Entity\Mission
+            mappedBy: financial_year
+            cascade: ["remove"]
+        functions_assoc:
+            targetEntity: AppBundle\Entity\FunctionAssoc
+            mappedBy: financial_year
+            cascade: ["remove"]
+    manyToOne:
+        society:
+            targetEntity: AppBundle\Entity\Society
+            inversedBy: financial_years
+            joinColumn:
+                nullable: false
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        start:
+            type: date
+        end:
+            type: date
+    lifecycleCallbacks: {  }

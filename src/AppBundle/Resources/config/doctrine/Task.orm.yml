@@ -1,0 +1,26 @@
+AppBundle\Entity\Task:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\TaskRepository
+    manyToOne:
+        function_assoc:
+            targetEntity: AppBundle\Entity\FunctionAssoc
+            inversedBy: tasks
+    manyToMany:
+        missions:
+            targetEntity: AppBundle\Entity\Mission
+            inversedBy: tasks
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: '50'
+        unity:
+            type: string
+            length: '50'
+    lifecycleCallbacks: {  }
