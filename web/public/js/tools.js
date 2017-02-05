@@ -95,45 +95,31 @@ var globalModalObj = {
 }
 var GlobaleModal = Object.create(globalModalObj).init();
 
-// Bootstrap notify
+// Notification
 var notify = {
-    settings: {
-        element         : 'body',
-        allow_dismiss   : true,
-        newest_on_top   : true,
-        showProgressbar : false,
-        placement       : {
-            from: 'top',
-            align: 'right'
-        },
-        offset      : 10,
-        spacing     : 5,
-        z_index     : 1031,
-        delay       : 5000,
-        timer       : 500,
-        mouse_over  : 'pause',
-        animate     : {
-            enter   : 'animated fadeInDown',
-            exit    : 'animated fadeOutRight'
-        },
-        type        : 'info',
-        icon        : 'fa fa-info',
-        template    :
-        '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
-        '<button type="button" aria-hidden="true" class="close" data-notify="dismiss"><span aria-hidden="true">×</span></button>' +
-        '<span data-notify="icon"></span> ' +
-        '<span data-notify="title">{1}</span> ' +
-        '<span data-notify="message">{2}</span>' +
-        '<div class="progress" data-notify="progressbar"></div>' +
-        '<a href="{3}" target="{4}" data-notify="url"></a>' +
-        '</div>'
+    options: {
+        "closeButton": true,
+        "debug": false,
+        "progressBar": true,
+        "preventDuplicates": false,
+        "positionClass": "toast-top-right",
+        "onclick": null,
+        "showDuration": "400",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
     },
-    simpleMessage: function(message, type, icon){
-        var settings = this.settings;
-        if (typeof type == 'string'){ settings.type = type; }
-        if (typeof icon == 'string'){settings.icon = icon;}
-        $.notify({
-            message: '<i class="' + settings.icon + '"></i>&nbsp;&nbsp;' + message
-        }, settings);
+
+    message: function(type, message, title){
+        try {
+            var title = typeof title == 'string' ? title : null;
+            toastr[type](message, title, this.options);
+        } catch (e){
+            console.log(e);
+        }
     }
 }

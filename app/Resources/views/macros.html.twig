@@ -23,7 +23,7 @@
     {% elseif type == 'remove' %}
         {% set options =  options|merge({'icon': 'fa fa-trash'}) %}
         {% set attrs = {
-            'data-confirm': 'purple',
+            'data-confirm': 'danger',
             'data-confirm-title': '<i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;' ~ ('warning')|trans,
             'data-confirm-content': 'removeConfirmation'|trans,
             'data-confirm-action': 'remove'|trans

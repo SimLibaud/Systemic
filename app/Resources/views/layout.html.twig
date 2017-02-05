@@ -3,6 +3,15 @@
 {% block layout %}
     <div id="wrapper">
 
+        {# Flash message #}
+        <ul id="flash-message-container">
+            {% for type, messages in app.session.flashbag.all %}
+                {% for message in messages %}
+                    <li data-type="{{ type }}">{{ message | trans }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+
         {# Main menu #}
         <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">

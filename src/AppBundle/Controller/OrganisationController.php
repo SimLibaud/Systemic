@@ -22,7 +22,7 @@ class OrganisationController extends Controller
      */
     public function listAction()
     {
-        $organisations = $this->getDoctrine()->getRepository('AppBundle:Organisation')->findAll();
+        $organisations = $this->getDoctrine()->getRepository('AppBundle:Organisation')->findBy([], ['name' => 'ASC']);
 
         return $this->render(':organisation:list.html.twig', [
             'organisations' => $organisations
@@ -44,7 +44,7 @@ class OrganisationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($form->getData());
             $em->flush();
-            $this->addFlash('success', 'addOrganisationSuccess');
+            $this->addFlash('success', 'addSuccess');
             return $this->redirectToRoute('app_organisation_list');
         }
 
@@ -68,7 +68,7 @@ class OrganisationController extends Controller
         $form->handleRequest($request);
         if ($form->isValid() and $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', 'editOrganisationSuccess');
+            $this->addFlash('success', 'editSuccess');
             return $this->redirectToRoute('app_organisation_list');
         }
         return $this->render(':organisation:form.html.twig', [
@@ -95,7 +95,7 @@ class OrganisationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($organisation);
             $em->flush();
-            $this->addFlash('success', 'removeOrganisationSuccess');;
+            $this->addFlash('success', 'removeSuccess');;
             return $this->redirectToRoute('app_organisation_list');
         }
         return $this->render(':organisation:remove.html.twig', [
