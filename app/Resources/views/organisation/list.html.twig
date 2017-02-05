@@ -1,0 +1,40 @@
+{% extends ':organisation:base.html.twig' %}
+{% import '::macros.html.twig' as macro %}
+
+{% block title_action %}
+    <a href="{{ path('app_organisation_add') }}" class="btn btn-primary">{{ 'add' | trans | capitalize }}</a>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Liste des organisations</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>{{ 'name' | trans }}</th>
+                                <th class="th-actions">{{ 'actions' | trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for organisation in organisations %}
+                                <tr>
+                                    <td>{{ organisation.name }}</td>
+                                    <td>
+                                        {{ macro.btnAction('edit', 'app_organisation_edit', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}
+                                        {{ macro.btnAction('remove', 'app_organisation_remove', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

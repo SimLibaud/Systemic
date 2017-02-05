@@ -21,6 +21,13 @@
         <script type="text/javascript" src="{{ asset('public/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('public/js/inspinia.js') }}"></script>
         <script type="text/javascript" src="{{ asset('public/js/plugins/pace/pace.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('public/js/tools.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('public/js/app.js') }}"></script>
+        <script type="text/javascript">
+            var Global = {
+                modal: Object.create(globalModalObj).init()
+            }
+        </script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

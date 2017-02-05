@@ -22,9 +22,7 @@
                                 <li><a href="login.html">Logout</a></li>
                             </ul>
                         </div>
-                        <div class="logo-element">
-                            ODG
-                        </div>
+                        <div class="logo-element">ODG</div>
                     </li>
                     <li>
                         <!-- All li elements o navigation -->
@@ -107,7 +105,7 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="title-action">
-                        <a href="" class="btn btn-primary">This is action area</a>
+                        {% block title_action %}{% endblock %}
                     </div>
                 </div>
             </div>
@@ -121,4 +119,6 @@
         </div>
     </div>
 
+    {# Global Modal #}
+    <div class="modal fade" id="global-modal" tabindex="-1"></div>
 {% endblock %}

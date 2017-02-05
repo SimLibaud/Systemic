@@ -195,4 +195,33 @@ class FinancialYear
     {
         return $this->society;
     }
+    /**
+     * @var \AppBundle\Entity\Organisation
+     */
+    private $organisation;
+
+
+    /**
+     * Set organisation
+     *
+     * @param \AppBundle\Entity\Organisation $organisation
+     *
+     * @return FinancialYear
+     */
+    public function setOrganisation(\AppBundle\Entity\Organisation $organisation)
+    {
+        $this->organisation = $organisation;
+
+        return $this;
+    }
+
+    /**
+     * Get organisation
+     *
+     * @return \AppBundle\Entity\Organisation
+     */
+    public function getOrganisation()
+    {
+        return $this->organisation;
+    }
 }

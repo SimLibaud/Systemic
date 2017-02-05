@@ -1,7 +1,0 @@
-app_society_list:
-    path: /
-    defaults: { _controller: AppBundle:Society:list }
-
-app_society_add:
-    path: /add
-    defaults: { _controller: AppBundle:Society:add }

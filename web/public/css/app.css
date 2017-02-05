@@ -1,6 +1,20 @@
-/* Layout general */
-/******************/
-
 /* Navbar */
 #side-menu .profile-element img{width: 48px;}
 #side-menu .navbar-fixed-top, .navbar-static-top{margin-bottom: 0;}
+
+/* Content */
+.th-actions{width: 140px;}
+
+/* Formulaire */
+.control-label.required:after{content:" *"; color:red;}
+
+/* Modal */
+.modal-danger .modal-header{background-color: #ed5565; color: #ffffff;}
+.modal-success .modal-header{background-color: #1c84c6; color: #ffffff;}
+.modal-warning .modal-header{background-color: #f7a54a; color: #ffffff;}
+.modal-primary .modal-header{background-color: #1ab394; color: #ffffff;}
+.modal-purple .modal-header{background-color: #8E44AD; color: #ffffff;}
+.modal .modal-body{background-color: #f8fafb;}
+
+/* Button */
+.btn.btn-purple{background-color: #8E44AD; color: #ffffff;}

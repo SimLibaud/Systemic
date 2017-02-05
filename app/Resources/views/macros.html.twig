@@ -8,3 +8,37 @@
         {% endif %}
     </li>
 {%- endmacro %}
+
+{# Btn action #}
+{% macro btnAction(type, path = '', arg = {}, options = {}) %}
+    {% set options = {
+        'icon': '',
+        'btn_class': options.btn is defined ?: 'btn btn-default btn-xs',
+        'title': options.title is defined ?: type,
+        'attrs': {}
+    } %}
+    {% set icon = '' %}
+    {% if type == 'edit' %}
+        {% set options =  options|merge({'icon': 'fa fa-pencil'}) %}
+    {% elseif type == 'remove' %}
+        {% set options =  options|merge({'icon': 'fa fa-trash'}) %}
+        {% set attrs = {
+            'data-confirm': 'purple',
+            'data-confirm-title': '<i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;' ~ ('warning')|trans,
+            'data-confirm-content': 'removeConfirmation'|trans,
+            'data-confirm-action': 'remove'|trans
+        } %}
+    {% endif %}
+    <a
+        href="{{ path(path, arg) }}"
+        class="{{ options.btn_class }}"
+        data-original-title="{{ options.title | trans }}"
+        {% if attrs is defined and attrs is iterable %}
+            {% for name, value in attrs %}
+                {{ name }}="{{ value }}"
+            {% endfor %}
+        {% endif %}
+    >
+        <i class="{{ options.icon }}"></i>
+    </a>
+{% endmacro %}

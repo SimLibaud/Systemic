@@ -12,8 +12,8 @@ AppBundle\Entity\FinancialYear:
             mappedBy: financial_year
             cascade: ["remove"]
     manyToOne:
-        society:
-            targetEntity: AppBundle\Entity\Society
+        organisation:
+            targetEntity: AppBundle\Entity\Organisation
             inversedBy: financial_years
             joinColumn:
                 nullable: false

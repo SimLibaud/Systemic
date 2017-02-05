@@ -1,0 +1,43 @@
+AppBundle\Entity\Organisation:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\OrganisationRepository
+    oneToMany:
+        financial_years:
+            targetEntity: AppBundle\Entity\FinancialYear
+            mappedBy: organisation
+            cascade: ["remove"]
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 100
+        description:
+            type: text
+            nullable: true
+        createdAt:
+            type: datetime
+            column: created_ad
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            column: updated_at
+            gedmo:
+                timestampable:
+                    on: update
+        slug:
+            type: string
+            length: 255
+            gedmo:
+                slug:
+                    separator: '-'
+                    fields:
+                        - name
+    lifecycleCallbacks: {  }

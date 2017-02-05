@@ -1,0 +1,21 @@
+app_organisation_list:
+    path: /
+    defaults: { _controller: AppBundle:Organisation:list }
+
+app_organisation_add:
+    path: /add
+    defaults: { _controller: AppBundle:Organisation:add }
+
+app_organisation_edit:
+    path: /{organisation_id}-{organisation_slug}/edit
+    defaults: { _controller: AppBundle:Organisation:edit }
+    requirements:
+        organisation_id: \d+
+        organisation_slug: "[a-zA-Z0-9-_]*"
+
+app_organisation_remove:
+    path: /{organisation_id}-{organisation_slug}/remove
+    defaults: { _controller: AppBundle:Organisation:remove }
+    requirements:
+        organisation_id: \d+
+        organisation_slug: "[a-zA-Z0-9-_]*"
