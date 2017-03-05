@@ -13,26 +13,32 @@
 {% macro btnAction(type, path = '', arg = {}, options = {}) %}
     {% set options = {
         'icon': '',
-        'btn_class': options.btn is defined ?: 'btn btn-default btn-xs',
-        'title': options.title is defined ?: type,
-        'attrs': {}
+        'btn_type': options.btn_type is defined ?  options.btn_type : 'default',
+        'btn_size': options.btn_size is defined ? options.btn_size : 'sm',
+        'title': options.title is defined ? options.title : type,
+        'visible_title': options.visible_title is defined ? options.visible_title : true,
+        'attrs': options.attrs is defined ? options.attrs : {}
     } %}
     {% set icon = '' %}
-    {% if type == 'edit' %}
+    {% if type == 'add' %}
+        {% set options =  options|merge({'icon': 'fa fa-plus'}) %}
+    {% elseif type == 'edit' %}
         {% set options =  options|merge({'icon': 'fa fa-pencil'}) %}
     {% elseif type == 'remove' %}
-        {% set options =  options|merge({'icon': 'fa fa-trash'}) %}
+        {% set options =  options|merge({'icon': 'fa fa-trash', 'btn_type': 'danger'}) %}
         {% set attrs = {
             'data-confirm': 'danger',
             'data-confirm-title': '<i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;' ~ ('warning')|trans,
             'data-confirm-content': 'removeConfirmation'|trans,
             'data-confirm-action': 'remove'|trans
-        } %}
+        }|merge(options.attrs) %}
     {% endif %}
     <a
         href="{{ path(path, arg) }}"
-        class="{{ options.btn_class }}"
-        data-original-title="{{ options.title | trans }}"
+        class="btn btn-{{ options.btn_type }} btn-{{ options.btn_size }}"
+        {% if options.visible_title == false %}
+            data-original-title="{{ options.title | trans }}"
+        {% endif %}
         {% if attrs is defined and attrs is iterable %}
             {% for name, value in attrs %}
                 {{ name }}="{{ value }}"
@@ -40,5 +46,8 @@
         {% endif %}
     >
         <i class="{{ options.icon }}"></i>
+        {% if options.visible_title == true %}
+            {{ options.title | trans }}
+        {% endif %}
     </a>
 {% endmacro %}

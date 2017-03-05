@@ -1,3 +1,32 @@
+app_default_about:
+    path: /about
+    defaults: { _controller: AppBundle:Default:about }
+
+# Import security routes
+app_security:
+    resource: "@AppBundle/Resources/config/routing/security.yml"
+
+# Import group routes
+app_group:
+    resource: "@AppBundle/Resources/config/routing/group.yml"
+    prefix: /group
+
+# Import user routes
+app_user:
+    resource: "@AppBundle/Resources/config/routing/user.yml"
+    prefix: /user
+
+# Import organisation routes
 app_organisation:
     resource: "@AppBundle/Resources/config/routing/organisation.yml"
     prefix: /organisation
+
+# Import employee routes
+app_employee:
+    resource: "@AppBundle/Resources/config/routing/employee.yml"
+    prefix: /organisation/{organisation_id}-{organisation_slug}/employee
+    requirements:
+        organisation_id: \d+
+        organisation_slug: "[a-zA-Z0-9-_]*"
+
+# Import financial year routes

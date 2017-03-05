@@ -30,6 +30,20 @@ class OrganisationController extends Controller
     }
 
     /**
+     * Info of organisation
+     *
+     * @param Organisation $organisation
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @ParamConverter("organisation", class="AppBundle:Organisation", options={"mapping"={"organisation_id": "id", "organisation_slug": "slug"}})
+     */
+    public function infoAction(Organisation $organisation)
+    {
+        return $this->render(':organisation:info.html.twig', [
+            'organisation'  => $organisation
+        ]);
+    }
+
+    /**
      * Add organisation
      *
      * @param Request $request
@@ -91,7 +105,7 @@ class OrganisationController extends Controller
         $form = $this->createForm(RemoveConfirmationType::class);
         $form->handleRequest($request);
 
-        if ((false === $organisation->hasChild()) || ($form->isSubmitted() and $form->isValid())) {
+        if ((false === $organisation->hasChild()) or ($form->isSubmitted() and $form->isValid())) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($organisation);
             $em->flush();

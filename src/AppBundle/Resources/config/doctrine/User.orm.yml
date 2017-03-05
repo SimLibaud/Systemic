@@ -1,0 +1,54 @@
+AppBundle\Entity\User:
+    type: entity
+    table: security_user
+    repositoryClass: AppBundle\Repository\UserRepository
+    manyToOne:
+        group:
+            targetEntity: AppBundle\Entity\Group
+            inversedBy: users
+            joinColumn:
+                nullable: true
+    manyToMany:
+        organisations:
+            targetEntity: AppBundle\Entity\Organisation
+            inversedBy: users
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        roles:
+            type: array
+        username:
+            type: string
+            length: 50
+        password:
+            type: string
+            length: 255
+        salt:
+            type: string
+            length: 255
+        firstname:
+            type: string
+            length: 50
+        lastname:
+            type: string
+            length: 50
+        isEnabled:
+            type: boolean
+            column: is_enabled
+        createdAt:
+            type: datetime
+            column: created_ad
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            column: updated_at
+            gedmo:
+                timestampable:
+                    on: update
+    lifecycleCallbacks: {  }

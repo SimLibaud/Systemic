@@ -1,0 +1,52 @@
+{% extends ':group:base.html.twig' %}
+{% import '::macros.html.twig' as macro %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    {{ macro.breadcrumbItem('remove'|trans) }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{ 'removeConfirmation' | trans }}
+                        <small>{{ group.name }}</small>
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="dd" id="nestable-users">
+                        <ol class="dd-list">
+                            <li class="dd-item" data-id="1">
+                                <div class="dd-handle">
+                                    <span class="label label-info"><i class="fa fa-users"></i></span>&nbsp;&nbsp;&nbsp;<strong>{{ 'users'|trans }}</strong>
+                                </div>
+                                <ol class="dd-list">
+                                    {% for user in group.users %}
+                                        <li class="dd-item" data-id="2">
+                                            <div class="dd-handle">
+                                                <span class="pull-right">
+                                                    {% for organisation in user.organisations %}
+                                                        <span class="label label-default">{{ organisation.name }}</span>
+                                                    {% endfor %}
+                                                </span>
+                                                <span class="label label-info"><i class="fa fa-user"></i></span>&nbsp;&nbsp;&nbsp;{{ user.firstname|capitalize }} {{ user.lastname|capitalize }}
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                    <br>
+                    {{ form_start(form) }}
+                        {{ form_row(form.remove_confirmation) }}
+                        {{ form_row(form.submit) }}
+                        {{ form_widget(form) }}
+                    {{ form_end(form ) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -4,10 +4,12 @@ $(document).on('ready', function(){
     $('[data-original-title]').tooltip()
 
     // Modale de confirmation standard
-    $('[data-confirm]').on('click', function(e){
+    $('[data-confirm]:not(:disabled)').on('click', function(e){
+        if ($(e.target).attr('disabled') == 'disabled') {
+            return false;
+        }
         e.preventDefault();
         var type = $(this).data('confirm');
-        console.log(type);
         Global.modal
             .reset()
             .setModalClass('modal-' + type)

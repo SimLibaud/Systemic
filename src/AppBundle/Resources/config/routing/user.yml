@@ -1,0 +1,19 @@
+app_user_list:
+    path: /
+    defaults: { _controller: AppBundle:User:list }
+
+app_user_add:
+    path: /add
+    defaults: { _controller: AppBundle:User:add }
+
+app_user_edit:
+    path: /{user_id}/edit
+    defaults: { _controller: AppBundle:User:edit }
+    requirements:
+        user_id: \d+
+
+app_user_remove:
+    path: /{user_id}/remove
+    defaults: { _controller: AppBundle:User:remove }
+    requirements:
+        user_id: \d+

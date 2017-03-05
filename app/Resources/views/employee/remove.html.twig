@@ -1,0 +1,28 @@
+{% extends ':employee:base.html.twig' %}
+{% import '::macros.html.twig' as macro %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    {{ macro.breadcrumbItem('remove'|trans) }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{ 'removeConfirmation' | trans }}
+                        <small>{{ employee.firstname|capitalize }} {{ employee.lastname|capitalize }}</small>
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    {{ form_start(form) }}
+                    {{ form_row(form.remove_confirmation) }}
+                    {{ form_row(form.submit) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form ) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -13,18 +13,16 @@
                     <h5>{{ 'organisationsList'  | trans}}</h5>
                 </div>
                 <div class="ibox-content">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>{{ 'name' | trans }}</th>
-                                <th class="th-actions">{{ 'actions' | trans }}</th>
-                            </tr>
-                        </thead>
+                    <table class="table table-hover">
                         <tbody>
                             {% for organisation in organisations %}
                                 <tr>
-                                    <td>{{ organisation.name }}</td>
-                                    <td>
+                                    <td class="project-title">
+                                        <a href="{{ path('app_organisation_info', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}">{{ organisation.name }}</a>
+                                        <br>
+                                        <small>{{ 'addedAt' | trans }} {{ organisation.createdAt|date('d/m/Y') }}</small>
+                                    </td>
+                                    <td class="project-actions">
                                         {{ macro.btnAction('edit', 'app_organisation_edit', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}
                                         {{ macro.btnAction('remove', 'app_organisation_remove', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}
                                     </td>
@@ -32,6 +30,7 @@
                             {% endfor %}
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>

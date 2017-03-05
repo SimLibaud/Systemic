@@ -1,0 +1,15 @@
+app_employee_list:
+    path: /
+    defaults: { _controller: AppBundle:Employee:list }
+
+app_employee_add:
+    path: /add
+    defaults: { _controller: AppBundle:Employee:add }
+
+app_employee_edit:
+    path: /{employee_id}/edit
+    defaults: { _controller: AppBundle:Employee:edit }
+
+app_employee_remove:
+    path: /{employee_id}/remove
+    defaults: { _controller: AppBundle:Employee:remove }

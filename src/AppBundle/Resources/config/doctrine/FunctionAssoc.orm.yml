@@ -5,7 +5,7 @@ AppBundle\Entity\FunctionAssoc:
     oneToMany:
         tasks:
             targetEntity: AppBundle\Entity\Task
-            mappedBy: functionAssoc
+            mappedBy: function_assoc
     manyToOne:
         financial_year:
             targetEntity: AppBundle\Entity\FinancialYear

@@ -17,11 +17,16 @@ class DefaultController extends Controller
 {
 
     /**
-     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function homeAction()
     {
         return $this->render(':default:home.html.twig');
+    }
+
+    public function aboutAction()
+    {
+        return $this->render(':default:about.html.twig');
     }
 
 }

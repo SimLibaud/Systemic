@@ -21,3 +21,11 @@
 
 /* FlashMessage */
 #flash-message-container{display: none;}
+
+/* Form */
+.form-group.has-error .help-block{color: #ed5565;}
+
+/* Table */
+.table > thead > tr > th, .table > tbody > tr > th,
+.table > tfoot > tr > th, .table > thead > tr > td,
+.table > tbody > tr > td, .table > tfoot > tr > td{vertical-align: middle;}

@@ -43,11 +43,17 @@ class Organisation
     private $financial_years;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $employees;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->financial_years = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->employees = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -214,8 +220,84 @@ class Organisation
         return $this->financial_years;
     }
 
+    /**
+     * @return bool
+     */
     public function hasChild()
     {
         return !$this->financial_years->isEmpty();
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $users;
+
+
+    /**
+     * Add user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Organisation
+     */
+    public function addUser(\AppBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \AppBundle\Entity\User $user
+     */
+    public function removeUser(\AppBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * Add employee
+     *
+     * @param \AppBundle\Entity\Employee $employee
+     *
+     * @return Organisation
+     */
+    public function addEmployee(\AppBundle\Entity\Employee $employee)
+    {
+        $this->employees[] = $employee;
+
+        return $this;
+    }
+
+    /**
+     * Remove employee
+     *
+     * @param \AppBundle\Entity\Employee $employee
+     */
+    public function removeEmployee(\AppBundle\Entity\Employee $employee)
+    {
+        $this->employees->removeElement($employee);
+    }
+
+    /**
+     * Get employees
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEmployees()
+    {
+        return $this->employees;
     }
 }

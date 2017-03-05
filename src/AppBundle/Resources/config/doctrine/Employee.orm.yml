@@ -2,6 +2,10 @@ AppBundle\Entity\Employee:
     type: entity
     table: null
     repositoryClass: AppBundle\Repository\EmployeeRepository
+    manyToOne:
+        organisation:
+            targetEntity: AppBundle\Entity\Organisation
+            inversedBy: employees
     id:
         id:
             type: integer
@@ -15,4 +19,16 @@ AppBundle\Entity\Employee:
         lastname:
             type: string
             length: '50'
+        createdAt:
+            type: datetime
+            column: created_ad
+            gedmo:
+                timestampable:
+                    on: create
+        updatedAt:
+            type: datetime
+            column: updated_at
+            gedmo:
+                timestampable:
+                    on: update
     lifecycleCallbacks: {  }

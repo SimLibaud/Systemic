@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block body_class %}gray-bg{% endblock %}
+
+{% block stylesheets %}
+    <style type="text/css">
+        .middle-box h1 {font-size: 130px; text-align: center;}
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <div>
+                <h1 class="logo-name">ODG</h1>
+            </div>
+            <h3>Bienvenue sur ODG</h3>
+            <p>
+                Connectez-vous afin d'accéder à l'application
+            </p>
+            {% if error is not null %}
+                <div class="alert alert-danger">Utilisateur et/ou mot de passe incorrect</div>
+            {% endif %}
+            {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_widget(form.app_security_username) }}
+                </div>
+                <div class="form-group">
+                    {{ form_widget(form.app_security_password) }}
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">{{ 'connection' | trans }}</button>
+                <a href="#"><small>Forgot password?</small></a>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

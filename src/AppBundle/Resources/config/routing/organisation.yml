@@ -2,6 +2,10 @@ app_organisation_list:
     path: /
     defaults: { _controller: AppBundle:Organisation:list }
 
+app_organisation_info:
+    path: /{organisation_id}-{organisation_slug}/info
+    defaults: { _controller: AppBundle:Organisation:info }
+
 app_organisation_add:
     path: /add
     defaults: { _controller: AppBundle:Organisation:add }

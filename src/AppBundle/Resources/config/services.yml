@@ -1,0 +1,18 @@
+services:
+    # Formulaire
+    app.form.user_type:
+        class: AppBundle\Form\UserType
+        arguments:
+            tokenStorage: "@security.token_storage"
+        tags:
+            - { name: form.type }
+    app.form.group_type:
+        class: AppBundle\Form\GroupType
+        arguments:
+            rolesProvider: "@app.security.roles_provider"
+        tags:
+            - { name: form.type}
+
+    #Security
+    app.security.roles_provider:
+        class: AppBundle\Security\RolesProvider

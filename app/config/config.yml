@@ -7,6 +7,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+    app_version: 0.1
 
 framework:
     #esi:             ~
@@ -17,7 +18,7 @@ framework:
         strict_requirements: ~
     form:            ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation:      { enabled: true }
     #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
@@ -40,6 +41,9 @@ twig:
     strict_variables: "%kernel.debug%"
     form_themes:
         - bootstrap_3_layout.html.twig
+        - :form:app_theme.html.twig
+    globals:
+        app_version: "%app_version%"
 
 # Doctrine Configuration
 doctrine:

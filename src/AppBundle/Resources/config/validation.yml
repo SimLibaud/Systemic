@@ -1,0 +1,44 @@
+AppBundle\Entity\Group:
+    properties:
+        name:
+            - NotBlank: ~
+        roles:
+            - NotBlank:
+                message: "groupMustAtLeastHaveOneRole"
+
+AppBundle\Entity\User:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: username
+            message: identifierAlreadyUsed
+    properties:
+        username:
+            - NotBlank: ~
+            - Length:
+                max: 50
+        firstname:
+            - NotBlank: ~
+            - Length:
+                max: 50
+        lastname:
+            - NotBlank: ~
+            - Length:
+                max: 50
+
+AppBundle\Entity\Organisation:
+    properties:
+        name:
+            - NotBlank: ~
+            - Length:
+                max: 100
+
+AppBundle\Entity\Employee:
+    properties:
+        firstname:
+            - NotBlank: ~
+            - Length:
+                max: 50
+        lastname:
+            - NotBlank: ~
+            - Length:
+                max: 50

@@ -1,0 +1,31 @@
+{% extends ':employee:base.html.twig' %}
+{% import '::macros.html.twig' as macro %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    {{ macro.breadcrumbItem((employee is defined ? 'edit' : 'add') | trans) }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{ (employee is defined ? 'editEmployee' : 'addEmployee') | trans }}
+                        {% if employee is defined  %}
+                            <small>{{ employee.firstname|capitalize }} {{ employee.lastname|capitalize }}</small>
+                        {% endif %}
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    {{ form_start(form) }}
+                        {{ form_row(form.firstname) }}
+                        {{ form_row(form.lastname) }}
+                        {{ form_widget(form.submit) }}
+                        {{ macro.btnAction('cancel', 'app_employee_list', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}, {'btn_size': 'btn'}) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

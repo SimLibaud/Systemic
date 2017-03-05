@@ -28,14 +28,14 @@ class FinancialYear
     private $missions;
 
     /**
+     * @var \AppBundle\Entity\Organisation
+     */
+    private $organisation;
+
+    /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $functions_assoc;
-
-    /**
-     * @var \AppBundle\Entity\Society
-     */
-    private $society;
 
     /**
      * Constructor
@@ -171,35 +171,6 @@ class FinancialYear
     {
         return $this->functions_assoc;
     }
-
-    /**
-     * Set society
-     *
-     * @param \AppBundle\Entity\Society $society
-     *
-     * @return FinancialYear
-     */
-    public function setSociety(\AppBundle\Entity\Society $society)
-    {
-        $this->society = $society;
-
-        return $this;
-    }
-
-    /**
-     * Get society
-     *
-     * @return \AppBundle\Entity\Society
-     */
-    public function getSociety()
-    {
-        return $this->society;
-    }
-    /**
-     * @var \AppBundle\Entity\Organisation
-     */
-    private $organisation;
-
 
     /**
      * Set organisation

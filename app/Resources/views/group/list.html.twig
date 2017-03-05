@@ -1,0 +1,39 @@
+{% extends ':group:base.html.twig' %}
+{% import '::macros.html.twig' as macro %}
+
+{% block title_action %}
+    <a href="{{ path('app_group_add') }}" class="btn btn-primary">{{ 'add' | trans | capitalize }}</a>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{ 'groupsList'  | trans}}</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-hover">
+                        <tbody>
+                        {% for group in groups %}
+                            <tr>
+                                <td class="project-title">
+                                    <a href="#">{{ group.name }}</a>
+                                    <br>
+                                    <small>{{ 'addedAt' | trans }} {{ group.createdAt|date('d/m/Y') }}</small>
+                                </td>
+                                <td class="project-actions">
+                                    {{ macro.btnAction('edit', 'app_group_edit', {'group_id': group.id, 'group_slug': group.slug}) }}
+                                    {% set attrs =  app.user.group == group ? {'disabled': 'disabled'} : {} %}
+                                    {{ macro.btnAction('remove', 'app_group_remove', {'group_id': group.id, 'group_slug': group.slug}, {'attrs': attrs}) }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

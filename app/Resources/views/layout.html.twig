@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block layout %}
+{% block body %}
     <div id="wrapper">
 
         {# Flash message #}
@@ -21,14 +21,14 @@
                             <img alt="image" class="img-circle" src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=retro">
                              </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Amelia Smith</strong>
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ app.user.firstname | capitalize }} {{ app.user.lastname | capitalize }}</strong>
                              </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a href="profile.html">Profile</a></li>
                                 <li><a href="contacts.html">Contacts</a></li>
                                 <li><a href="mailbox.html">Mailbox</a></li>
                                 <li class="divider"></li>
-                                <li><a href="login.html">Logout</a></li>
+                                <li><a href="{{ path('app_security_logout') }}">Logout</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">ODG</div>
@@ -94,8 +94,8 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
-                                <i class="fa fa-sign-out"></i> Log out
+                            <a href="{{ path('app_security_logout') }}">
+                                <i class="fa fa-sign-out"></i>Logout
                             </a>
                         </li>
                     </ul>
@@ -123,6 +123,16 @@
                     <div class="wrapper wrapper-content">
                         {% block content %}{% endblock %}
                     </div>
+                </div>
+            </div>
+
+            {# Footer #}
+            <div class="footer">
+                <div class="pull-right">
+                    <strong>ODG - DYAM</strong> {{ app_version }} - <a href="{{ path('app_default_about') }}">{{ 'about' | trans | capitalize }}</a>
+                </div>
+                <div>
+                    <strong>Copyright</strong> Myriam Didier &#169; {{ 'now'|date('Y') }}
                 </div>
             </div>
         </div>

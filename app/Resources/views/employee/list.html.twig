@@ -1,0 +1,45 @@
+{% extends ':employee:base.html.twig' %}
+{% import '::macros.html.twig' as macro %}
+
+{% block title_action %}
+    <a href="{{ path('app_employee_add', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}" class="btn btn-primary">{{ 'add' | trans | capitalize }}</a>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{ 'employeesList'  | trans}}</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ 'firstname' | trans }}</th>
+                                <th>{{ 'lastname' | trans }}</th>
+                                <th>{{ 'dateAdded' | trans }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for employee in employees %}
+                            <tr>
+                                <td class="project-status">{{ employee.firstname }}</td>
+                                <td>{{ employee.lastname }}</td>
+                                <td>
+                                    <small>{{ 'addedAt' | trans }} {{ employee.createdAt|date('d/m/Y') }}</small>
+                                </td>
+                                <td class="project-actions">
+                                    {{ macro.btnAction('edit', 'app_employee_edit', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug, 'employee_id': employee.id}) }}
+                                    {{ macro.btnAction('remove', 'app_employee_remove', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug, 'employee_id': employee.id}) }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

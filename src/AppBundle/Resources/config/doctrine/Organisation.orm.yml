@@ -7,6 +7,13 @@ AppBundle\Entity\Organisation:
             targetEntity: AppBundle\Entity\FinancialYear
             mappedBy: organisation
             cascade: ["remove"]
+        employees:
+            targetEntity: AppBundle\Entity\Employee
+            mappedBy: organisation
+    manyToMany:
+        users:
+            targetEntity: AppBundle\Entity\User
+            mappedBy: organisations
     id:
         id:
             type: integer

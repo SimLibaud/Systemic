@@ -5,8 +5,12 @@ index:
 home:
     path: /{_locale}/
     defaults: { _controller: AppBundle:Default:home }
+    requirements:
+        _locale: fr
 
 # Include AppBundle routes
 app:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix: /{_locale}
+    requirements:
+        _locale: fr

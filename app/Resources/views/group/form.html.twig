@@ -1,0 +1,31 @@
+{% extends ':group:base.html.twig' %}
+{% import '::macros.html.twig' as macro %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    {{ macro.breadcrumbItem((group is defined ? 'edit' : 'add') | trans) }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{ (group is defined ? 'editGroup' : 'addGroup') | trans }}
+                        {% if group is defined  %}
+                            <small>{{ group.name }}</small>
+                        {% endif %}
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    {{ form_start(form) }}
+                        {{ form_row(form.name) }}
+                        {{ form_row(form.roles) }}
+                        {{ form_widget(form.submit) }}
+                        {{ macro.btnAction('cancel', 'app_group_list', {}, {'btn_size': 'btn'}) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

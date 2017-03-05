@@ -13,15 +13,15 @@
         <link rel="stylesheet" href="{{ asset('public/css/app.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
-    <body>
-        {% block layout %}{% endblock %}
+    <body class="{% block body_class %}mini-navbar{% endblock %}">
+        {% block body %}{% endblock %}
         <script type="text/javascript" src="{{ asset('public/js/jquery-2.1.1.js') }}"></script>
         <script type="text/javascript" src="{{ asset('public/js/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('public/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
         <script type="text/javascript" src="{{ asset('public/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('public/js/plugins/toastr/toastr.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('public/js/plugins/nestable/jquery.nestable.js') }}"></script>
         <script type="text/javascript" src="{{ asset('public/js/inspinia.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('public/js/plugins/pace/pace.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('public/js/tools.js') }}"></script>
         <script type="text/javascript" src="{{ asset('public/js/app.js') }}"></script>
         <script type="text/javascript">

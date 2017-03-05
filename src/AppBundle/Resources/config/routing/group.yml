@@ -1,0 +1,21 @@
+app_group_list:
+    path: /
+    defaults: { _controller: AppBundle:Group:list }
+
+app_group_add:
+    path: /add
+    defaults: { _controller: AppBundle:Group:add }
+
+app_group_edit:
+    path: /{group_id}-{group_slug}/edit
+    defaults: { _controller: AppBundle:Group:edit }
+    requirements:
+        group_id: \d+
+        group_slug: "[a-zA-Z0-9-_]*"
+
+app_group_remove:
+    path: /{group_id}-{group_slug}/remove
+    defaults: { _controller: AppBundle:Group:remove }
+    requirements:
+        group_id: \d+
+        group_slug: "[a-zA-Z0-9-_]*"

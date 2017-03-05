@@ -106,7 +106,7 @@ var notify = {
         "onclick": null,
         "showDuration": "400",
         "hideDuration": "1000",
-        "timeOut": "5000",
+        "timeOut": "4000",
         "extendedTimeOut": "1000",
         "showEasing": "swing",
         "hideEasing": "linear",

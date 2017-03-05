@@ -22,6 +22,20 @@ class Employee
      */
     private $lastname;
 
+    /**
+     * @var \DateTime
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
+     * @var \AppBundle\Entity\Organisation
+     */
+    private $organisation;
 
     /**
      * Get id
@@ -79,5 +93,82 @@ class Employee
     public function getLastname()
     {
         return $this->lastname;
+    }
+
+    /**
+     * Set organisation
+     *
+     * @param \AppBundle\Entity\Organisation $organisation
+     *
+     * @return Employee
+     */
+    public function setOrganisation(\AppBundle\Entity\Organisation $organisation = null)
+    {
+        $this->organisation = $organisation;
+
+        return $this;
+    }
+
+    /**
+     * Get organisation
+     *
+     * @return \AppBundle\Entity\Organisation
+     */
+    public function getOrganisation()
+    {
+        return $this->organisation;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Employee
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Employee
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    public function hasChild()
+    {
+        return true;
     }
 }

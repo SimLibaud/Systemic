@@ -1,8 +1,6 @@
 {% extends ':organisation:base.html.twig' %}
 {% import '::macros.html.twig' as macro %}
 
-{% set title = (society is defined ? 'edit' : 'addOrganisation') | trans %}
-
 {% block breadcrumb %}
     {{ parent() }}
     {{ macro.breadcrumbItem((society is defined ? 'edit' : 'add') | trans) }}
@@ -22,6 +20,9 @@
                 <div class="ibox-content">
                     {{ form_start(form) }}
                         {{ form_row(form.name) }}
+                        {{ form_row(form.description) }}
+                        {{ form_widget(form.submit) }}
+                        {{ macro.btnAction('cancel', 'app_organisation_list', {}, {'btn_size': 'btn'}) }}
                     {{ form_end(form) }}
                 </div>
             </div>
