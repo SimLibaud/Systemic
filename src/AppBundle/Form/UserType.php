@@ -8,6 +8,10 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\User;
+use AppBundle\Repository\GroupRepository;
+use AppBundle\Repository\OrganisationRepository;
+use Doctrine\ORM\QueryBuilder;
+use Gedmo\Tree\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -59,6 +63,11 @@ class UserType extends AbstractType
             ->add('organisations', EntityType::class, [
                 'label' => 'organisations',
                 'class' => 'AppBundle:Organisation',
+                'query_builder' => function(OrganisationRepository $orga_repo) {
+                    return $orga_repo
+                        ->createQueryBuilder('orga')
+                        ->addOrderBy('orga.name', 'ASC');
+                },
                 'choice_label' => 'name',
                 'multiple'  => true,
                 'expanded' => false,
@@ -67,6 +76,11 @@ class UserType extends AbstractType
             ->add('group', EntityType::class, [
                 'label' => 'group',
                 'class' => 'AppBundle:Group',
+                'query_builder' => function(GroupRepository $group_repo) {
+                    return $group_repo
+                        ->createQueryBuilder('groups')
+                        ->addOrderBy('groups.name', 'ASC');
+                },
                 'choice_label' => 'name',
                 'multiple' => false,
                 'expanded' => false

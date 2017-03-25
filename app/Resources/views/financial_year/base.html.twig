@@ -1,0 +1,9 @@
+{% extends '::layout.html.twig' %}
+{% import '::macros.html.twig' as macro %}
+
+{% block title %}{{ 'accountingCyclesManagement' | trans }}{% endblock %}
+
+{% block breadcrumb %}
+    {{ macro.breadcrumbItem(organisation.name, 'app_organisation_info', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}
+    {{ macro.breadcrumbItem('accountingCycles'|trans) }}
+{% endblock %}

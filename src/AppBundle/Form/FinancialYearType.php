@@ -21,10 +21,10 @@ class FinancialYearType extends AbstractType
     {
         $builder
             ->add('start', DateType::class, [
-                'label' => 'start',
+                'label' => 'beginOfAccountingCycle',
             ])
-            ->and('end', DateType::class, [
-                'label' => 'end'
+            ->add('end', DateType::class, [
+                'label' => 'endOfAccountingCycle'
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'record',

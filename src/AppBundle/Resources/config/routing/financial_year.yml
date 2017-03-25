@@ -1,3 +1,25 @@
+app_financial_year_list:
+    path: /
+    defaults: { _controller: AppBundle:FinancialYear:list }
+
+app_financial_year_info:
+    path: /{financial_year_id}/info
+    defaults: { _controller: AppBundle:FinancialYear:info }
+    requirements:
+        financial_year_id: \d+
+
 app_financial_year_add:
     path: /add
     defaults: { _controller: AppBundle:FinancialYear:add }
+
+app_financial_year_edit:
+    path: /{financial_year_id}/edit
+    defaults: { _controller: AppBundle:FinancialYear:edit }
+    requirements:
+        financial_year_id: \d+
+
+app_financial_year_remove:
+    path: /{financial_year_id}/remove
+    defaults: { _controller: AppBundle:FinancialYear:remove }
+    requirements:
+        financial_year_id: \d+

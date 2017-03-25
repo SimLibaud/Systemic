@@ -22,7 +22,16 @@ class OrganisationController extends Controller
      */
     public function listAction()
     {
-        $organisations = $this->getDoctrine()->getRepository('AppBundle:Organisation')->findBy([], ['name' => 'ASC']);
+        $organisations = $this->getDoctrine()->getRepository('AppBundle:Organisation')
+            ->createQueryBuilder('organisation')
+            ->join('organisation.users', 'user')
+            ->leftJoin('organisation.employees', 'employees')
+            ->leftJoin('organisation.financial_years', 'financial_year')
+            ->where('user = :user')
+            ->addOrderBy('organisation.name', 'ASC')
+            ->setParameter('user', $this->getUser())
+            ->addSelect('employees', 'financial_year')
+            ->getQuery()->getArrayResult();
 
         return $this->render(':organisation:list.html.twig', [
             'organisations' => $organisations
@@ -80,7 +89,7 @@ class OrganisationController extends Controller
     {
         $form = $this->createForm(OrganisationType::class, $organisation);
         $form->handleRequest($request);
-        if ($form->isValid() and $form->isValid()) {
+        if ($form->isSubmitted() and $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'editSuccess');
             return $this->redirectToRoute('app_organisation_list');

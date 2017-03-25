@@ -1,0 +1,23 @@
+{% extends ':financial_year:base.html.twig' %}
+{% import '::macros.html.twig' as macro %}
+
+{% set fy = financialYear %}
+
+{% block breadcrumb %}
+    {{ macro.breadcrumbItem(organisation.name, 'app_organisation_info', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}
+    {{ macro.breadcrumbItem(organisation.name, 'app_financial_year_info', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug, 'financial_year_id': financialYear.id}) }}
+{% endblock %}
+
+{% block title %}{{ 'accountingCycle' | trans }} :
+    <span class="label label-default">
+        <i class="fa fa-calendar"></i>&nbsp;&nbsp;
+        {{ fy.start | date('d/m/Y') }} <i class="fa fa-angle-right"></i> {{ fy.end | date('d/m/Y') }}
+    </span>
+{% endblock %}
+
+{% block title_action %}
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}

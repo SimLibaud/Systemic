@@ -25,7 +25,8 @@ class GroupController extends Controller
     public function listAction()
     {
         return $this->render(':group:list.html.twig', [
-            'groups' => $this->getDoctrine()->getRepository('AppBundle:Group')->findBy([], ['name' => 'ASC'])
+            'groups' => $this->getDoctrine()->getRepository('AppBundle:Group')->findBy([], ['name' => 'ASC']),
+            'total_roles' => $this->get('app.security.roles_provider')->getAppRoles()
         ]);
     }
 

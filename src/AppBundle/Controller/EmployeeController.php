@@ -111,7 +111,7 @@ class EmployeeController extends Controller
         $form = $this->createForm(RemoveConfirmationType::class);
         $form->handleRequest($request);
 
-        if(false === $employee->hasChild() or ($form->isSubmitted() and $form->isValid())) {
+        if(false === $employee->hasChild() || ($form->isSubmitted() and $form->isValid())) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($employee);
             $em->flush();

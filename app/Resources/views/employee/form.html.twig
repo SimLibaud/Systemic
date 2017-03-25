@@ -19,8 +19,8 @@
                 </div>
                 <div class="ibox-content">
                     {{ form_start(form) }}
-                        {{ form_row(form.firstname) }}
                         {{ form_row(form.lastname) }}
+                        {{ form_row(form.firstname) }}
                         {{ form_widget(form.submit) }}
                         {{ macro.btnAction('cancel', 'app_employee_list', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}, {'btn_size': 'btn'}) }}
                     {{ form_end(form) }}

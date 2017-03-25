@@ -1,0 +1,28 @@
+{% extends ':financial_year:base.html.twig' %}
+{% import '::macros.html.twig' as macro %}
+
+{% block breadcrumb %}
+    {{ parent() }}
+    {{ macro.breadcrumbItem((financialYear is defined  ? 'edit' : 'add') | trans) }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{ (financialYear is defined ? 'editOrganisation' : 'addOrganisation') | trans }}
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    {{ form_start(form) }}
+                        {{ form_row(form.start) }}
+                        {{ form_row(form.end) }}
+                        {{ form_widget(form.submit) }}
+                        {{ macro.btnAction('cancel', 'app_financial_year_list', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}, {'btn_size': 'btn'}) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -8,13 +8,38 @@
 {% block title %}{{ organisation.name }}{% endblock %}
 
 {% block content %}
-    <ul>
-        <li><a href="{{ path('app_employee_list', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}">Gestion des employés</a></li>
-        {% for fy in organisation.getfinancialYears() %}
-            <li>{{ fy.start|date('d/m/Y') }} - {{ fy.end|date('d/m/Y') }}</li>
-        {% endfor %}
-        {#
-        <li><a href="{{ path('app_financial_year_add', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}">Ajouter une année comptable</a></li>
-        #}
-    </ul>
+    <div class="row">
+        {% if hasUserAccessToRoute(app.user, 'app_employee_list') %}
+            <a class="btn-link" href="{{ path('app_employee_list', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}">
+                <div class="col-lg-3">
+                    <div class="widget style1 white-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-users fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> {{ 'employees' | trans }} </span>
+                                <h2 class="font-bold">{{ organisation.employees | length }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="btn-link" href="{{ path('app_financial_year_list', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}">
+                <div class="col-lg-3">
+                    <div class="widget style1 white-bg">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <i class="fa fa-calendar fa-5x"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> {{ 'accountingCycles' | trans }} </span>
+                                <h2 class="font-bold">{{ organisation.financialYears | length }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        {% endif %}
+    </div>
 {% endblock %}

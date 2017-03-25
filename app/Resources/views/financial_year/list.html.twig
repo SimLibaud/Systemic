@@ -1,0 +1,66 @@
+{% extends ':financial_year:base.html.twig' %}
+{% import '::macros.html.twig' as macro %}
+
+{% block title_action %}
+    {% if hasUserAccessToRoute(app.user, 'app_financial_year_add') %}
+        <a href="{{ path('app_financial_year_add', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}" class="btn btn-primary">{{ 'add' | trans | capitalize }}</a>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{ 'accountingCyclesList'  | trans}}</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>{{ 'accountingCycle' | trans }}</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for fy in financial_years %}
+                                {% set progress = 0 %}
+                                {% if fy.start|date('U') < 'now'|date('U') and fy.end|date('U') > 'now'|date('U') %}
+                                    {% set time_total = fy.end|date('U') - fy.start|date('U') %}
+                                    {% set time_elapsed = 'now'|date('U') - fy.start|date('U') %}
+                                    {% set progress = (time_elapsed * 100) / time_total %}
+                                {% elseif fy.end|date('U') < 'now'|date('U') %}
+                                    {% set progress = 100 %}
+                                {% endif %}
+                                <tr>
+                                    <th>{{ loop.index }}</th>
+                                    <td>
+                                        <a href="{{ path('app_financial_year_info', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug, 'financial_year_id': fy.id}) }}">
+                                            <span class="label label-default">
+                                                <i class="fa fa-calendar"></i>&nbsp;&nbsp;
+                                                {{ fy.start | date('d/m/Y') }} <i class="fa fa-angle-right"></i> {{ fy.end | date('d/m/Y') }}
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td class="project-completion">
+                                        <small>Avancement {{ progress|round}}%</small>
+                                        <div class="progress progress-small" style="width: 420px;margin-bottom: 0 !important;">
+                                            <div style="width: {{ progress }}%;" class="progress-bar progress-bar-{{ progress == 100 ? 'success' : progress > 0 ? 'default' : 'default' }}"></div>
+                                        </div>
+                                    </td>
+                                    <td class="project-actions">
+                                        {{ macro.btnAction('edit', 'app_financial_year_edit', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug, 'financial_year_id': fy.id}) }}
+                                        {{ macro.btnAction('remove', 'app_financial_year_remove', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug, 'financial_year_id': fy.id}) }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

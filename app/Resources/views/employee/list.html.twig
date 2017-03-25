@@ -2,7 +2,9 @@
 {% import '::macros.html.twig' as macro %}
 
 {% block title_action %}
-    <a href="{{ path('app_employee_add', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}" class="btn btn-primary">{{ 'add' | trans | capitalize }}</a>
+    {% if hasUserAccessToRoute(app.user, 'app_employee_add') %}
+        <a href="{{ path('app_employee_add', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}" class="btn btn-primary">{{ 'add' | trans | capitalize }}</a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -16,16 +18,16 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>{{ 'firstname' | trans }}</th>
                                 <th>{{ 'lastname' | trans }}</th>
+                                <th>{{ 'firstname' | trans }}</th>
                                 <th>{{ 'dateAdded' | trans }}</th>
                             </tr>
                         </thead>
                         <tbody>
                         {% for employee in employees %}
                             <tr>
-                                <td class="project-status">{{ employee.firstname }}</td>
                                 <td>{{ employee.lastname }}</td>
+                                <td>{{ employee.firstname }}</td>
                                 <td>
                                     <small>{{ 'addedAt' | trans }} {{ employee.createdAt|date('d/m/Y') }}</small>
                                 </td>

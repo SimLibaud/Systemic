@@ -6,6 +6,12 @@
     {{ macro.breadcrumbItem((user is defined ? 'edit' : 'add') | trans) }}
 {% endblock %}
 
+{% block stylesheets %}
+    <style type="text/css">
+        select#user_organisations{height:200px;}
+    </style>
+{% endblock %}
+
 {% block content %}
     <div class="row">
         <div class="col-lg-12">

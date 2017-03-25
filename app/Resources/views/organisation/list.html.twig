@@ -2,7 +2,9 @@
 {% import '::macros.html.twig' as macro %}
 
 {% block title_action %}
-    <a href="{{ path('app_organisation_add') }}" class="btn btn-primary">{{ 'add' | trans | capitalize }}</a>
+    {% if hasUserAccessToRoute(app.user, 'app_organisation_add') %}
+        <a href="{{ path('app_organisation_add') }}" class="btn btn-primary">{{ 'add' | trans | capitalize }}</a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -14,13 +16,33 @@
                 </div>
                 <div class="ibox-content">
                     <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ 'organisation' | trans }}</th>
+                                <th>{{ 'employees' | trans }}</th>
+                                <th>{{ 'accountingCycles' | trans }}</th>
+                                <th>{{ 'dateAdded' | trans }}</th>
+                                <th>{{ 'dateEdited' | trans }}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
                         <tbody>
                             {% for organisation in organisations %}
                                 <tr>
-                                    <td class="project-title">
+                                    <td>
                                         <a href="{{ path('app_organisation_info', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}">{{ organisation.name }}</a>
-                                        <br>
+                                    </td>
+                                    <td>
+                                        {{ 'employeeNb' | transchoice(organisation.employees|length, {'%count%': organisation.employees|length}) }}
+                                    </td>
+                                    <td>
+                                        {{ organisation.financial_years | length }}
+                                    </td>
+                                    <td>
                                         <small>{{ 'addedAt' | trans }} {{ organisation.createdAt|date('d/m/Y') }}</small>
+                                    </td>
+                                    <td>
+                                        <small>{{ 'editedAt' | trans }} {{ organisation.updatedAt|date('d/m/Y') }}</small>
                                     </td>
                                     <td class="project-actions">
                                         {{ macro.btnAction('edit', 'app_organisation_edit', {'organisation_id': organisation.id, 'organisation_slug': organisation.slug}) }}

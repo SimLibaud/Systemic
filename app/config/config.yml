@@ -75,7 +75,6 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-
 # Doctrine extentions Configuration
 stof_doctrine_extensions:
     default_locale: fr
@@ -83,3 +82,12 @@ stof_doctrine_extensions:
         default:
             sluggable: true
             timestampable: true
+
+# SilRouteSecurity Configuration
+sil_route_security:
+    enable_access_control: true
+    secured_routes: []
+    secured_routes_format: "/^app_/"
+    ignored_routes: [home, app_security_login, app_security_logout, app_default_about, app_user_account_info]
+    #ignored_routes_format: ""
+    #naming_strategy: service_id_of_naming_strategy

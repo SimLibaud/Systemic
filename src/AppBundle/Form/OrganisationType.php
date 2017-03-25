@@ -7,6 +7,8 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Repository\UserRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -27,6 +29,23 @@ class OrganisationType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'description',
                 'required'  => false
+            ])
+            ->add('users', EntityType::class, [
+                'class' => 'AppBundle:User',
+                'label' => 'associatedUsers',
+                'choice_label' => function($user){
+                    return $user->getFirstname().' '.$user->getLastname();
+                },
+                'query_builder' => function(UserRepository $repository){
+                    return $repository
+                        ->createQueryBuilder('user')
+                        ->addOrderBy('user.firstname', 'ASC')
+                    ;
+                },
+                'multiple' => true,
+                'expanded' => false,
+                'required' => false,
+                'by_reference' => false
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'record',

@@ -13,6 +13,8 @@ services:
         tags:
             - { name: form.type}
 
-    #Security
+    # Security
     app.security.roles_provider:
         class: AppBundle\Security\RolesProvider
+        arguments:
+            roles_for_routes: "@=service('sil_route_security.roles_provider').getRoles()"

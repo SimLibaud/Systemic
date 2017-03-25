@@ -6,6 +6,12 @@
     {{ macro.breadcrumbItem((group is defined ? 'edit' : 'add') | trans) }}
 {% endblock %}
 
+{% block stylesheets %}
+    <style type="text/css">
+        select#group_roles{height:400px;}
+    </style>
+{% endblock %}
+
 {% block content %}
     <div class="row">
         <div class="col-lg-12">

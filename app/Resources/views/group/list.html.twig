@@ -2,7 +2,9 @@
 {% import '::macros.html.twig' as macro %}
 
 {% block title_action %}
-    <a href="{{ path('app_group_add') }}" class="btn btn-primary">{{ 'add' | trans | capitalize }}</a>
+    {% if hasUserAccessToRoute(app.user, 'app_group_add') %}
+        <a href="{{ path('app_group_add') }}" class="btn btn-primary">{{ 'add' | trans | capitalize }}</a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -14,13 +16,33 @@
                 </div>
                 <div class="ibox-content">
                     <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{ 'group' | trans }}</th>
+                                <th>{{ 'roles' | trans }}</th>
+                                <th>{{ 'users' | trans }}</th>
+                                <th>{{ 'dateAdded' | trans }}</th>
+                                <th>{{ 'dateEdited' | trans }}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
                         <tbody>
                         {% for group in groups %}
                             <tr>
-                                <td class="project-title">
-                                    <a href="#">{{ group.name }}</a>
-                                    <br>
+                                <td>
+                                    <span class="label label-default">{{ group.name }}</span>
+                                </td>
+                                <td>
+                                    {{ group.roles | length }} / {{ total_roles | length }}
+                                </td>
+                                <td>
+                                    {{ 'usersNb' | transchoice(group.users|length, {'%count%': group.users|length}) }}
+                                </td>
+                                <td>
                                     <small>{{ 'addedAt' | trans }} {{ group.createdAt|date('d/m/Y') }}</small>
+                                </td>
+                                <td>
+                                    <small>{{ 'editedAt' | trans }} {{ group.updatedAt|date('d/m/Y') }}</small>
                                 </td>
                                 <td class="project-actions">
                                     {{ macro.btnAction('edit', 'app_group_edit', {'group_id': group.id, 'group_slug': group.slug}) }}

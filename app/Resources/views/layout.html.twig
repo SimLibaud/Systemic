@@ -1,128 +1,83 @@
 {% extends '::base.html.twig' %}
 
+{% block body_class %}top-navigation pace-done{% endblock %}
+
 {% block body %}
     <div id="wrapper">
-
-        {# Flash message #}
-        <ul id="flash-message-container">
-            {% for type, messages in app.session.flashbag.all %}
-                {% for message in messages %}
-                    <li data-type="{{ type }}">{{ message | trans }}</li>
-                {% endfor %}
-            {% endfor %}
-        </ul>
-
-        {# Main menu #}
-        <nav class="navbar-default navbar-static-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li class="nav-header">
-                        <div class="dropdown profile-element"> <span>
-                            <img alt="image" class="img-circle" src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=retro">
-                             </span>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ app.user.firstname | capitalize }} {{ app.user.lastname | capitalize }}</strong>
-                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span> </span> </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="profile.html">Profile</a></li>
-                                <li><a href="contacts.html">Contacts</a></li>
-                                <li><a href="mailbox.html">Mailbox</a></li>
-                                <li class="divider"></li>
-                                <li><a href="{{ path('app_security_logout') }}">Logout</a></li>
-                            </ul>
-                        </div>
-                        <div class="logo-element">ODG</div>
-                    </li>
-                    <li>
-                        <!-- All li elements o navigation -->
-                    </li>
-                </ul>
-            </div>
-        </nav>
-
-        {#  Second menu #}
         <div id="page-wrapper" class="gray-bg">
-            <div class="row border-bottom">
-                <nav class="navbar navbar-static-top  " role="navigation">
+            <div class="row border-bottom white-bg">
+                <nav class="navbar navbar-static-top" role="navigation">
                     <div class="navbar-header">
-                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                        <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                            <i class="fa fa-reorder"></i>
+                        </button>
+                        <a href="{{ path('home') }}" class="navbar-brand"><strong>ODG</strong></a>
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="{{ path('home') }}">
+                                    <span class="m-r-sm text-muted welcome-message">{{ 'managementTool' | trans | upper }} - DYAM</span>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
-                    <ul class="nav navbar-top-links navbar-right">
-                        <li>
-                            <span class="m-r-sm text-muted welcome-message">ODG - Outils de gestion - DYAM</span>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-alerts">
-                                <li>
-                                    <a href="mailbox.html">
-                                        <div>
-                                            <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                            <span class="pull-right text-muted small">4 minutes ago</span>
-                                        </div>
-                                    </a>
+                    <div class="navbar-collapse collapse" id="navbar">
+                        <ul class="nav navbar-nav navbar-right">
+                            {# Organisation #}
+                            {% if hasUserAccessToRoute(app.user, 'app_organisation_list') %}
+                                <li class="dropdown"><a href="{{ path('app_organisation_list') }}"><i class="fa fa-archive"></i>{{ 'organisations' | trans }}</a></li>
+                            {% endif %}
+
+                            {# Security #}
+                            {% if hasUserAccessAtLeastOneRoute(app.user, ['app_user_list', 'app_group_list']) %}
+                                <li class="dropdown">
+                                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shield"></i> Sécurité</a>
+                                    <ul role="menu" class="dropdown-menu">
+                                        {% if hasUserAccessToRoute(app.user, 'app_user_list') %}
+                                            <li><a href="{{ path('app_user_list') }}"><i class="fa fa-user"></i>{{ 'usersManagement' | trans }}</a></li>
+                                        {% endif %}
+                                        {% if hasUserAccessToRoute(app.user, 'app_group_list') %}
+                                            <li><a href="{{ path('app_group_list') }}"><i class="fa fa-users"></i>{{ 'groupsManagement' | trans }}</a></li>
+                                        {% endif %}
+                                    </ul>
                                 </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="profile.html">
-                                        <div>
-                                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                            <span class="pull-right text-muted small">12 minutes ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="grid_options.html">
-                                        <div>
-                                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                            <span class="pull-right text-muted small">4 minutes ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <div class="text-center link-block">
-                                        <a href="notifications.html">
-                                            <strong>See All Alerts</strong>
-                                            <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="{{ path('app_security_logout') }}">
-                                <i class="fa fa-sign-out"></i>Logout
-                            </a>
-                        </li>
-                    </ul>
+                            {% endif %}
+
+                            {# Connected user #}
+                            <li class="dropdown connected-user">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="avatar fa fa-user-circle"></i>
+                                    {{ app.user.firstname | capitalize }} {{ app.user.lastname | capitalize }}
+                                </a>
+                                <ul role="menu" class="dropdown-menu">
+                                    <li>
+                                        <a href="{{ path('app_user_account_info') }}"><i class="fa fa-address-card"></i>{{ 'myAccount' | trans }}</a>
+                                    </li>
+                                    <li><a href="{{ path('app_security_logout') }}"><i class="fa fa-sign-out"></i>{{ 'logout' | trans }}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
             </div>
-            {# Content #}
-            <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-lg-9">
-                    <h2>{% block title %}{% endblock %}</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="{{ path('home') }}">{{ 'home' | trans | capitalize }}</a>
-                        </li>
-                        {% block breadcrumb %}{% endblock %}
-                    </ol>
-                </div>
-                <div class="col-lg-3">
-                    <div class="title-action">
-                        {% block title_action %}{% endblock %}
-                    </div>
-                </div>
-            </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="wrapper wrapper-content">
-                        {% block content %}{% endblock %}
+                <div class="wrapper wrapper-content">
+                <div class="col-md-12 white-bg page-header">
+                    <div class="col-lg-9">
+                        <h2>{% block title %}{% endblock %}</h2>
+                        <ol class="breadcrumb">
+                            <li>
+                                <a href="{{ path('home') }}">{{ 'home' | trans | capitalize }}</a>
+                            </li>
+                            {% block breadcrumb %}{% endblock %}
+                        </ol>
                     </div>
+                    <div class="col-lg-3">
+                        <div class="title-action">
+                            {% block title_action %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+                    {% block content %}{% endblock %}
                 </div>
             </div>
 
@@ -140,4 +95,14 @@
 
     {# Global Modal #}
     <div class="modal fade" id="global-modal" tabindex="-1"></div>
+
+    {# Flash message #}
+    <ul id="flash-message-container">
+        {% for type, messages in app.session.flashbag.all %}
+            {% for message in messages %}
+                <li data-type="{{ type }}">{{ message | trans }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+
 {% endblock %}

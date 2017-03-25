@@ -1,6 +1,22 @@
-/* Navbar */
-#side-menu .profile-element img{width: 48px;}
-#side-menu .navbar-fixed-top, .navbar-static-top{margin-bottom: 0;}
+/* Header */
+.top-navigation .wrapper.wrapper-content{padding: 15px 15px 0 15px !important;}
+#page-wrapper{margin-left: 0 !important;}
+#page-wrapper .page-header{padding-bottom: 15px;margin-bottom: 10px; margin-top: 0 !important;}
+#page-wrapper .connected-user > a{
+    display: inline-block;
+    padding-top: 0px !important;
+    padding-bottom: 0 !important;
+    font-size: 13px;
+    line-height: 50px;
+}
+#page-wrapper .connected-user .avatar{
+    font-size: 28px;
+    position: relative;
+    top: 5px;
+}
+#page-wrapper .connected-user .dropdown-menu a{font-size: 12px;}
+#page-wrapper #navbar .dropdown a > i{margin-right: 10px;}
+
 
 /* Content */
 .th-actions{width: 140px;}
@@ -18,6 +34,7 @@
 
 /* Button */
 .btn.btn-purple{background-color: #8E44AD; color: #ffffff;}
+.btn.btn-action i{margin-right: 5px;}
 
 /* FlashMessage */
 #flash-message-container{display: none;}
@@ -29,3 +46,9 @@
 .table > thead > tr > th, .table > tbody > tr > th,
 .table > tfoot > tr > th, .table > thead > tr > td,
 .table > tbody > tr > td, .table > tfoot > tr > td{vertical-align: middle;}
+
+.project-title .title{
+    font-size: 14px;
+    color: #676a6c;
+    font-weight: 600;
+}

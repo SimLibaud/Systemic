@@ -12,9 +12,11 @@ use AppBundle\Entity\User;
 class RolesProvider
 {
 
-    public function __construct()
-    {
+    private $roles_for_routes;
 
+    public function __construct($roles_for_routes)
+    {
+        $this->roles_for_routes = $roles_for_routes;
     }
 
     /**
@@ -24,7 +26,7 @@ class RolesProvider
      */
     public function getAppRoles()
     {
-        return [User::ROLE_DEFAULT, 'ROLE_ACCESS_TO_ALL_ORGANISATIONS'];
+        return $this->roles_for_routes;
     }
 
 }

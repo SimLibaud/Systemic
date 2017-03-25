@@ -1,5 +1,17 @@
 {% extends '::layout.html.twig' %}
+{% import '::macros.html.twig' as macro %}
+
+{% block breadcrumb %}
+    {{ macro.breadcrumbItem('about'|trans, 'app_default_about') }}
+{% endblock %}
+
+{% block title %}{{ 'about' | trans }}{% endblock %}
 
 {% block content %}
-
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -16,6 +16,11 @@ app_user:
     resource: "@AppBundle/Resources/config/routing/user.yml"
     prefix: /user
 
+# Import user account
+app_user_account:
+    resource: "@AppBundle/Resources/config/routing/user_account.yml"
+    prefix: /my-account
+
 # Import organisation routes
 app_organisation:
     resource: "@AppBundle/Resources/config/routing/organisation.yml"
@@ -30,3 +35,10 @@ app_employee:
         organisation_slug: "[a-zA-Z0-9-_]*"
 
 # Import financial year routes
+app_financial_year:
+    resource: "@AppBundle/Resources/config/routing/financial_year.yml"
+    prefix: /organisation/{organisation_id}-{organisation_slug}/financial-year
+    requirements:
+        organisation_id: \d+
+        financial_year_id: \d+
+        organisation_slug: "[a-zA-Z0-9-_]*"

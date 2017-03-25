@@ -2,7 +2,9 @@
 {% import '::macros.html.twig' as macro %}
 
 {% block title_action %}
-    <a href="{{ path('app_user_add') }}" class="btn btn-primary">{{ 'add' | trans | capitalize }}</a>
+    {% if hasUserAccessToRoute(app.user, 'app_user_add') %}
+        <a href="{{ path('app_user_add') }}" class="btn btn-primary">{{ 'add' | trans | capitalize }}</a>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -18,10 +20,9 @@
                             <tr>
                                 <th>{{ 'user' | trans }}</th>
                                 <th>{{ 'group' | trans }}</th>
+                                <th>{{ 'organisations' | trans }}</th>
                                 <th>{{ 'dateAdded' | trans }}</th>
-                                {#
-                                <th>{{ "organisations" | trans }}</th>
-                                #}
+                                <th>{{ 'dateEdited' | trans }}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -40,9 +41,15 @@
                                         {{ user.group.name }}
                                     </td>
                                     <td>
+                                        <span class="label label-info" data-original-title="{{ 'thisUserHasAccessToNbOrganisations'|transchoice(user.organisations|length, {'%nb_organisation%': user.organisations|length}) }}">
+                                            {{ 'organisationNb'|transchoice(user.organisations|length, {'%count%': user.organisations|length}) }}
+                                        </span>
+                                    </td>
+                                    <td>
                                         <small>{{ 'addedAt' | trans }} {{ user.createdAt|date('d/m/Y') }}</small>
                                     </td>
                                     <td>
+                                        <small>{{ 'editedAt' | trans }} {{ user.updatedAt|date('d/m/Y') }}</small>
                                     </td>
                                     <td class="project-actions">
                                         {{ macro.btnAction('edit', 'app_user_edit', {'user_id': user.id}) }}

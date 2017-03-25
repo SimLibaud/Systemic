@@ -48,6 +48,11 @@ class Organisation
     private $employees;
 
     /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $users;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -227,11 +232,6 @@ class Organisation
     {
         return !$this->financial_years->isEmpty();
     }
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $users;
-
 
     /**
      * Add user
@@ -243,6 +243,7 @@ class Organisation
     public function addUser(\AppBundle\Entity\User $user)
     {
         $this->users[] = $user;
+        $user->addOrganisation($this);
 
         return $this;
     }
@@ -255,6 +256,7 @@ class Organisation
     public function removeUser(\AppBundle\Entity\User $user)
     {
         $this->users->removeElement($user);
+        $user->removeOrganisation($this);
     }
 
     /**

@@ -1,9 +1,6 @@
 {% extends '::layout.html.twig' %}
 
+{% block title %}{{ 'home' | trans }}{% endblock %}
+
 {% block content %}
-    <ul>
-        <li><a href="{{ path('app_organisation_list') }}">Liste des organisations</a></li>
-        <li><a href="{{ path('app_group_list') }}">Liste des groups</a></li>
-        <li><a href="{{ path('app_user_list') }}">Liste des utilisateurs</a></li>
-    </ul>
 {% endblock %}

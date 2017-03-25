@@ -169,6 +169,6 @@ class Employee
 
     public function hasChild()
     {
-        return true;
+        return false;
     }
 }
